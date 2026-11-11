@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuietSpot 2.0 — Review 2 Presentation | Kongu Engineering College</title>
+  <style>
+    :root {
+      --kec-green-dark: #0a542e;
+      --kec-green-primary: #108043;
+      --kec-green-light: #f0fdf4;
+      --kec-gold: #ca8a04;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --border-light: #e2e8f0;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #1e293b;
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
+
+    /* Top Controls Bar */
+    .controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1100px;
+      background: #ffffff;
+      padding: 10px 20px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 8px;
+      border: 1px solid var(--border-light);
+      background: #ffffff;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn:hover { background: #f1f5f9; }
+    .btn-primary { background: var(--kec-green-primary); color: #ffffff; border-color: var(--kec-green-primary); }
+    .btn-primary:hover { background: var(--kec-green-dark); }
+
+    /* 16:9 Slide Canvas */
+    .slide-viewport {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16 / 9;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Slide Header */
+    .slide-header {
+      background: var(--kec-green-dark);
+      color: #ffffff;
+      padding: 12px 28px;
+      border-bottom: 4px solid var(--kec-gold);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-inst {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #bbf7d0;
+      letter-spacing: 0.03em;
+    }
+    .header-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-top: 2px;
+    }
+    .header-tag {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--kec-gold);
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    /* Slide Body */
+    .slide-body {
+      flex: 1;
+      padding: 24px 28px;
+      background: var(--bg-page);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Slide Footer */
+    .slide-footer {
+      padding: 8px 28px;
+      background: #ffffff;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Card Layouts */
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--kec-green-dark);
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 6px;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; height: 100%; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+    ul { padding-left: 20px; line-height: 1.5; font-size: 0.88rem; }
+    li { margin-bottom: 6px; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    th { background: var(--kec-green-dark); color: #ffffff; text-align: left; padding: 8px 12px; }
+    td { padding: 8px 12px; border-bottom: 1px solid var(--border-light); }
+    tr:nth-child(even) { background: #f8fafc; }
+
+    /* Hidden Slides */
+    .slide { display: none; width: 100%; height: 100%; }
+    .slide.active { display: flex; flex-direction: column; }
+  </style>
+</head>
+<body>
+
+  <!-- Controls -->
+  <div class="controls-bar">
+    <div style="font-weight: 700; color: var(--kec-green-dark); display: flex; align-items: center; gap: 8px;">
+      <span>QuietSpot 2.0</span>
+      <span style="font-size: 0.8rem; background: var(--kec-green-light); color: var(--kec-green-primary); padding: 2px 8px; border-radius: 6px;">Review 2 Presentation</span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <button class="btn" onclick="prevSlide()">◀ Previous</button>
+      <span id="slideIndicator" style="font-weight: 700; font-size: 0.9rem; min-width: 90px; text-align: center;">Slide 1 of 14</span>
+      <button class="btn" onclick="nextSlide()">Next ▶</button>
+      <button class="btn btn-primary" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+    </div>
+  </div>
+
+  <!-- Slide Viewport -->
+  <div class="slide-viewport" id="viewport">
+
+    <!-- SLIDE 1 -->
+    <div class="slide active" id="slide-1">
+      <div style="background: var(--kec-green-dark); color: #fff; text-align: center; padding: 28px 20px; border-bottom: 5px solid var(--kec-gold);">
+        <h2 style="font-size: 1.35rem; font-weight: 800; letter-spacing: 0.04em;">KONGU ENGINEERING COLLEGE (AUTONOMOUS)</h2>
+        <p style="font-size: 0.85rem; color: #bbf7d0; margin-top: 4px;">Affiliated to Anna University | Accredited by NAAC with 'A++' Grade | Perundurai, Erode - 638060</p>
+        <h1 style="font-size: 2.1rem; font-weight: 800; color: var(--kec-gold); margin: 12px 0 4px;">QUIETSPOT 2.0</h1>
+        <p style="font-size: 1.05rem; font-weight: 600;">Intelligent Campus Noise Mapping and Quiet-Spot Recommendation System Using Quadtree</p>
+        <span style="display: inline-block; background: rgba(255,255,255,0.15); padding: 4px 14px; border-radius: 9999px; font-size: 0.8rem; margin-top: 10px; font-weight: 700; color: #bbf7d0;">
+          PROJECT REVIEW - II (Phase of 70%+ Prototype Completion)
+        </span>
+      </div>
+
+      <div class="slide-body" style="padding: 24px 36px;">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">PROJECT TEAM MEMBERS</div>
+            <ul>
+              <li><strong>Student 1 (Team Leader)</strong> — Roll No: 22CSRxxx</li>
+              <li><strong>Student 2</strong> — Roll No: 22CSRxxx</li>
+              <li><strong>Student 3</strong> — Roll No: 22CSRxxx</li>
+              <li><strong>Student 4</strong> — Roll No: 22CSRxxx</li>
+            </ul>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">
+              B.E. Computer Science and Engineering | Kongu Engineering College
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">SUPERVISOR & INSTITUTION DETAILS</div>
+            <ul>
+              <li><strong>Project Supervisor:</strong> Dr. / Prof. [Guide Name], M.E., Ph.D.</li>
+              <li><strong>Designation:</strong> Assistant Professor / Associate Professor</li>
+              <li><strong>Department:</strong> Department of Computer Science and Engineering</li>
+              <li><strong>Academic Year:</strong> 2024 - 2025 | Pre-Final / Final Year Mini-Project</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>QuietSpot 2.0 &bull; Review 2 Presentation</span>
+        <span>Slide 1 of 14</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide" id="slide-2">
+      <div class="slide-header">
+        <div>
+          <div class="header-inst">KONGU ENGINEERING COLLEGE (Autonomous), PERUNDURAI</div>
+          <div class="header-title">2. Problem Statement</div>
+        </div>
+        <div class="header-tag">CHALLENGE & MOTIVATION</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Campus Scale & Noise Challenges</div>
+            <ul>
+              <li><strong>Vast Campus:</strong> KEC spans over 167 acres with dozens of academic blocks, food courts, reading lounges, and convention centers.</li>
+              <li><strong>Dynamic Acoustic Fluctuations:</strong> Ambient noise varies constantly across study hours due to machinery, food court rushes, and vehicular traffic at gates.</li>
+              <li><strong>Productivity Loss:</strong> Students waste 15 to 30 minutes walking across campus searching for quiet revision spots during exams.</li>
+              <li><strong>Static Map Shortcomings:</strong> Existing college maps are static and provide zero environmental or acoustic awareness.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Technical & Privacy Dilemma</div>
+            <ul>
+              <li><strong>Hardware Cost Barrier:</strong> Installing dedicated physical decibel meters across a 167-acre campus is capital-intensive and hard to maintain.</li>
+              <li><strong>Privacy Concerns:</strong> Traditional sound apps upload raw voice/audio buffers, causing students to reject microphone permissions.</li>
+              <li><strong>Spatial Search Inefficiency:</strong> Exhaustive O(N) linear scanning scales poorly as geographic telemetry points expand.</li>
+              <li><strong>Core Problem:</strong> How to provide KEC students with real-time, privacy-guaranteed quiet spot recommendations using existing devices, accelerated by custom 2D Spatial Quadtrees?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>QuietSpot 2.0 &bull; Review 2 Presentation</span>
+        <span>Slide 2 of 14</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide" id="slide-3">
+      <div class="slide-header">
+        <div>
+          <div class="header-inst">KONGU ENGINEERING COLLEGE (Autonomous), PERUNDURAI</div>
+          <div class="header-title">3. Domain Background</div>
+        </div>
+        <div class="header-tag">LITERATURE & FOUNDATIONS</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">1. Smart Campus Geospatial Systems (GIS)</div>
+            <ul>
+              <li>Integrates OpenStreetMap (OSM) vector geometry and verified GPS coordinates.</li>
+              <li>Implements spatial bounding-box containment for KEC [11.2650° to 11.2800° N, 77.5950° to 77.6150° E].</li>
+              <li>Scopes queries strictly to verified campus academic blocks and libraries.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">2. Pervasive Crowd-Sensing Telemetry</div>
+            <ul>
+              <li>Transforms everyday student smartphones and laptops into passive environmental sensor nodes.</li>
+              <li>Eliminates dedicated hardware costs while achieving high geographic coverage.</li>
+              <li>Enables consensual, anonymous telemetry contributions from study spots.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">3. In-Browser Edge Audio Processing (Web Audio API)</div>
+            <ul>
+              <li>Hardware-accelerated Digital Signal Processing (DSP) inside the client browser sandbox.</li>
+              <li>Converts PCM Float32 time-domain buffers into Root-Mean-Square (RMS) amplitude locally in RAM.</li>
+              <li>Guarantees zero raw audio storage, recording, or server upload.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">4. Spatial Quadtrees & Priority Queues</div>
+            <ul>
+              <li>Hierarchical 2D space partitioning decomposing quadrants (NW, NE, SW, SE).</li>
+              <li>Prunes non-candidate search branches in O(log N + K) time vs O(N) linear exhaustion.</li>
+              <li>Custom Binary Min-Heap priority queues power multi-criteria candidate ranking.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>QuietSpot 2.0 &bull; Review 2 Presentation</span>
+        <span>Slide 3 of 14</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide" id="slide-4">
+      <div class="slide-header">
+        <div>
+          <div class="header-inst">KONGU ENGINEERING COLLEGE (Autonomous), PERUNDURAI</div>
+          <div class="header-title">4. Objectives of the Project</div>
+        </div>
+        <div class="header-tag">PROJECT GOALS</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title">OBJ-1: KEC Campus Mapping</div>
+            <p style="font-size: 0.85rem; line-height: 1.5;">Map and verify key quiet study locations within Kongu Engineering College (CD Memorial Library, IT Lounge, Admin Hall, Hostels) using verified OpenStreetMap data.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">OBJ-2: Zero-Audio Privacy</div>
+            <p style="font-size: 0.85rem; line-height: 1.5;">Implement in-browser client-side Web Audio RMS estimation where raw audio buffers are processed in volatile memory and immediately discarded. Never record or upload raw audio.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">OBJ-3: Custom 2D Quadtree</div>
+            <p style="font-size: 0.85rem; line-height: 1.5;">Develop a custom 2D Quadtree from scratch in Python to achieve quadrant subdivision, range filtering, and radius pruning without external spatial packages.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">OBJ-4: Min-Heap Ranking</div>
+            <p style="font-size: 0.85rem; line-height: 1.5;">Engineer a weighted scoring model: Score = wN*Noise + wD*Distance + wA*Age, ranked via custom binary Min-Heap to recommend optimal quiet study zones.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">OBJ-5: Algorithm Lab</div>
+            <p style="font-size: 0.85rem; line-height: 1.5;">Build an interactive benchmark module comparing Quadtree vs Linear Scan over varying dataset sizes (500 to 20,000 points) with nanosecond timers and equality checks.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">OBJ-6: Responsive Web App</div>
+            <p style="font-size: 0.85rem; line-height: 1.5;">Deliver a unified responsive web application matching Figma design with interactive Leaflet map, live decibel gauge, and 1-click Google Maps navigation.</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>QuietSpot 2.0 &bull; Review 2 Presentation</span>
+        <span>Slide 4 of 14</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide" id="slide-5">
+      <div class="slide-header">
+        <div>
+          <div class="header-inst">KONGU ENGINEERING COLLEGE (Autonomous), PERUNDURAI</div>
+          <div class="header-title">5. Existing System vs Limitations</div>
+        </div>
+        <div class="header-tag">COMPARATIVE ANALYSIS</div>
+      </div>
+      <div class="slide-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Existing Approach</th>
+              <th>Working Mechanism</th>
+              <th>Key Limitations</th>
+              <th>Impact on Students</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Static Signboards & Notice Boards</strong></td>
+              <td>Printed quiet zone signs at library and seminar entrance doors.</td>
+              <td>Completely static; cannot reflect sudden overcrowding, event noise, or maintenance work.</td>
+              <td>Students walk across campus only to find the spot crowded or noisy.</td>
+            </tr>
+            <tr>
+              <td><strong>Generic Maps (Google / Apple Maps)</strong></td>
+              <td>Displays road network, building footprint, and generic navigation routes.</td>
+              <td>Zero acoustic awareness; no indoor noise data; no quiet study recommendations.</td>
+              <td>Helps reach a building, but cannot indicate acoustic comfort inside.</td>
+            </tr>
+            <tr>
+              <td><strong>Dedicated IoT Hardware Decibel Meters</strong></td>
+              <td>Microcontroller boards (ESP32) hardwired with sound sensors.</td>
+              <td>High setup & maintenance cost; vulnerable to vandalism and weather damage.</td>
+              <td>Unscalable across a 167-acre campus; limited to 2-3 isolated test points.</td>
+            </tr>
+            <tr>
+              <td><strong>Third-Party Acoustic Apps</strong></td>
+              <td>Smartphone apps measuring decibels on device.</td>
+              <td>Frequently upload raw audio or buffers, triggering severe privacy concerns.</td>
+              <td>Students hesitate or reject installation due to eavesdropping fears.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="card" style="background: var(--kec-green-light); border-color: var(--kec-gold);">
+          <strong>Summary of Gaps:</strong> High infrastructure cost, lack of real-time acoustic updates, zero algorithmic candidate pruning, and absence of client-side privacy guarantees in existing systems.
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>QuietSpot 2.0 &bull; Review 2 Presentation</span>
+        <span>Slide 5 of 14</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div class="slide" id="slide-6">
+      <div class="slide-header">
+        <div>
+          <div class="header-inst">KONGU ENGINEERING COLLEGE (Autonomous), PERUNDURAI</div>
+          <div class="header-title">6. Proposed System — QuietSpot 2.0</div>
+        </div>
+        <div class="header-tag">SOLUTION ARCHITECTURE</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title">1. Distributed Sensing</div>
+            <p style="font-size: 0.85rem;">Leverages students' existing devices without requiring expensive external hardware sensors. Runs purely in modern web browsers.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">2. Web Audio Privacy</div>
+            <p style="font-size: 0.85rem;">Calculates Root-Mean-Square (RMS) amplitude locally in volatile memory. Strictly zero raw audio buffers are stored or uploaded.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">3. Custom 2D Quadtree</div>
+            <p style="font-size: 0.85rem;">Indexes all campus study spots hierarchically, enabling sub-millisecond candidate pruning in O(log N + K) time instead of O(N) linear exhaustion.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">4. Min-Heap Ranking</div>
+            <p style="font-size: 0.85rem;">Combines normalized noise penalty (wN=0.50), walking distance (wD=0.30), and freshness (wA=0.20) ranked via custom binary Min-Heap.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">5. Transparent Freshness</div>
+            <p style="font-size: 0.85rem;">Distinguishes Fresh (&lt;30m), Aging (30-120m), and Stale (&gt;120m). Unmeasured locations are penalized transparently rather than assumed quiet.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">6. Google Maps Navigation</div>
+            <p style="font-size: 0.85rem;">Generates 1-click turn-by-turn walking route directions from the student's current GPS position to the selected campus study spot.</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>QuietSpot 2.0 &bull; Review 2 Presentation</span>
+        <span>Slide 6 of 14</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 -->
+    <div class="slide" id="slide-7">
+      <div class="slide-header">
+        <div>
+          <div class="header-inst">KONGU ENGINEERING COLLEGE (Autonomous), PERUNDURAI</div>
+          <div class="header-title">7. System Architecture & Workflow</div>
+        </div>
+        <div class="header-tag">ARCHITECTURAL BLUEPRINT</div>
+      </div>
+      <div class="slide-body">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="card" style="border-left: 5px solid var(--kec-green-dark); padding: 12px 18px;">
+            <strong style="color: var(--kec-green-dark);">1. CLIENT TIER (Frontend):</strong> React 19 + Vite 5 + Vanilla CSS tokens
+            <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">Web Audio API (Float32 RMS Engine) &bull; Leaflet Interactive Map &bull; Geolocation API &bull; Live Decibel Gauge & Waveform &bull; Algorithm Benchmark Visualizer</div>
+          </div>
+          <div class="card" style="border-left: 5px solid var(--kec-gold); padding: 12px 18px;">
+            <strong style="color: var(--kec-gold);">2. REST API & SECURITY LAYER:</strong> Python Flask 3.1 + Flask-CORS
+            <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">Route Handlers (/locations, /readings, /recommendations) &bull; Raw-Audio Rejection Guard (HTTP 400) &bull; Campus Bounds Validator</div>
+          </div>
+          <div class="card" style="border-left: 5px solid var(--kec-green-primary); padding: 12px 18px;">
+            <strong style="color: var(--kec-green-primary);">3. ALGORITHM & SERVICE TIER:</strong> Custom Algorithmic Core
+            <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">Custom 2D Spatial Quadtree (quadtree.py) &bull; Custom Hash Map (custom_hash_map.py) &bull; Custom Binary Min-Heap (min_heap.py) &bull; Haversine Distance Math</div>
+          </div>
+          <div class="card" style="border-left: 5px solid #475569; padding: 12px 18px;">
+            <strong style="color: #475569;">4. PERSISTENCE TIER (Database):</strong> SQLite Database Engine
+            <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">campus_locations (Verified KEC OSM Coordinates) &bull; noise_readings (Derived dB Telemetry) &bull; user_feedback &bull; app_users (PBKDF2 Hashes)</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>QuietSpot 2.0 &bull; Review 2 Presentation</span>
+        <span>Slide 7 of 14</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 8 -->
+    <div class="slide" id="slide-8">
+      <div class="slide-header">
+        <div>
+          <div class="header-inst">KONGU ENGINEERING COLLEGE (Autonomous), PERUNDURAI</div>
+          <div class="header-title">8. Modules Description</div>
+        </div>
+        <div class="header-tag">FUNCTIONAL MODULES</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Module 1: Web Audio Acoustic Engine</div>
+            <ul>
+              <li>Interfaces with getUserMedia with explicit consent.</li>
+              <li>Calculates Float32 time-domain RMS amplitude.</li>
+              <li>Maps dBFS to relative scale (20 to 100 rel. dB).</li>
+              <li>Categorizes: Quiet (&lt;45), Moderate (45-65), Noisy (&gt;65).</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Module 2: Campus Geospatial Visualizer</div>
+            <ul>
+              <li>Leaflet map centered on KEC (11.27218° N, 77.60400° E).</li>
+              <li>Custom color-coded SVG markers showing live noise.</li>
+              <li>Category filter pills and 'Locate Me' controls.</li>
+              <li>1-click walking directions via Google Maps.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Module 3: Custom Spatial Quadtree</div>
+            <ul>
+              <li>Custom recursive 2D tree decomposing 4 quadrants.</li>
+              <li>Performs rectangular range and circular radius queries.</li>
+              <li>Reduces search from O(N) to O(log N + K) average.</li>
+              <li>Backed by Custom Hash Map for O(1) spot caching.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Module 4: Recommendation Engine</div>
+            <ul>
+              <li>Multi-factor score: wN*Noise + wD*Distance + wA*Age.</li>
+              <li>Custom Min-Heap extracts top-K candidates.</li>
+              <li>Produces transparent explanations for each spot.</li>
+              <li>Penalizes unmeasured locations for data uncertainty.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>QuietSpot 2.0 &bull; Review 2 Presentation</span>
+        <span>Slide 8 of 14</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 9 -->
+    <div class="slide" id="slide-9">
+      <div class="slide-header">
+        <div>
+          <div class="header-inst">KONGU ENGINEERING COLLEGE (Autonomous), PERUNDURAI</div>
+          <div class="header-title">9. Tools and Technologies Used</div>
+        </div>
+        <div class="header-tag">TECH STACK</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title">Frontend Technologies</div>
+            <ul>
+              <li><strong>React 19 & Vite 5:</strong> Sub-second reactive UI</li>
+              <li><strong>React Router v6:</strong> HashRouter single-page routing</li>
+              <li><strong>Leaflet & OSM:</strong> Interactive vector mapping</li>
+              <li><strong>Lucide React:</strong> Clean SVG icons</li>
+              <li><strong>Vanilla CSS:</strong> Figma design token system</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Backend Technologies</div>
+            <ul>
+              <li><strong>Python 3.13:</strong> High-performance core runtime</li>
+              <li><strong>Flask 3.1 & CORS:</strong> RESTful microframework</li>
+              <li><strong>SQLite 3:</strong> ACID embedded relational persistence</li>
+              <li><strong>Werkzeug Security:</strong> PBKDF2 password hashing</li>
+              <li><strong>pytest 9.1:</strong> 21 automated backend tests</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Hardware & Spatial APIs</div>
+            <ul>
+              <li><strong>W3C Web Audio API:</strong> In-browser RMS DSP</li>
+              <li><strong>Geolocation API:</strong> Precise GPS positioning</li>
+              <li><strong>OSM Overpass API:</strong> Verified KEC campus survey</li>
+              <li><strong>Google Maps Navigation:</strong> Walking route scheme</li>
+              <li><strong>Vitest Suite:</strong> 7 automated frontend tests</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>QuietSpot 2.0 &bull; Review 2 Presentation</span>
+        <span>Slide 9 of 14</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 10 -->
+    <div class="slide" id="slide-10">
+      <div class="slide-header">
+        <div>
+          <div class="header-inst">KONGU ENGINEERING COLLEGE (Autonomous), PERUNDURAI</div>
+          <div class="header-title">10. Database Design & Campus Dataset</div>
+        </div>
+        <div class="header-tag">PERSISTENCE & OSM DATA</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">SQLite Database Schema</div>
+            <ul>
+              <li><strong>campus_locations:</strong> id (PK), name, lat, lon, location_type, description, is_active, data_source. Indexed on (lat, lon).</li>
+              <li><strong>noise_readings:</strong> id (PK), location_id (FK), relative_intensity, noise_category, measured_at, measurement_method. Indexed on (location_id, measured_at DESC).</li>
+              <li><strong>user_feedback:</strong> id (PK), location_id (FK), feedback_value, user_comment, created_at.</li>
+              <li><strong>app_users:</strong> id (PK), username (UNIQUE), email (UNIQUE), password_hash (PBKDF2).</li>
+              <li><strong>Privacy Rule:</strong> Zero BLOB or raw audio columns exist.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Verified KEC Campus Locations Dataset</div>
+            <ul>
+              <li>CD Memorial Central Library (11.27096° N, 77.60528° E)</li>
+              <li>IT Block Study Lounge (11.27339° N, 77.60690° E)</li>
+              <li>Admin Block Reading Hall (11.27429° N, 77.60705° E)</li>
+              <li>Maharaja Auditorium Foyer (11.27236° N, 77.60597° E)</li>
+              <li>Science & Humanities Courtyard (11.27487° N, 77.60778° E)</li>
+              <li>ECE Dept Seminar Alcove (11.27220° N, 77.60542° E)</li>
+              <li>Mechanical & Mechatronics Block (11.27029° N, 77.60380° E)</li>
+              <li>KEC Food Court & Single's Canteen (11.27263° N, 77.60678° E)</li>
+              <li>Hostel Study Halls & Main Gate 1 (11.27340° N, 77.60825° E)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>QuietSpot 2.0 &bull; Review 2 Presentation</span>
+        <span>Slide 10 of 14</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 11 -->
+    <div class="slide" id="slide-11">
+      <div class="slide-header">
+        <div>
+          <div class="header-inst">KONGU ENGINEERING COLLEGE (Autonomous), PERUNDURAI</div>
+          <div class="header-title">11. Algorithm & Mathematical Methodology</div>
+        </div>
+        <div class="header-tag">ALGORITHMIC FOUNDATIONS</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">1. Custom 2D Spatial Quadtree</div>
+            <ul>
+              <li>Decomposes 2D space into NW, NE, SW, SE child quadrants when node bucket capacity K=4 is reached.</li>
+              <li>Prunes non-intersecting quadrants before inspecting candidate points.</li>
+              <li>Circular radius query: bounding-box filtering + Haversine check.</li>
+              <li>Complexity: O(log N + K) query vs O(N) linear exhaustion.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">2. Custom Separate Chaining Hash Map</div>
+            <ul>
+              <li>Polynomial Rolling Hash: h = (sum(c_i * 31^i)) mod capacity.</li>
+              <li>Separate chaining linked list resolves key collisions.</li>
+              <li>Dynamic resizing: doubles capacity when load factor &gt; 0.75.</li>
+              <li>Average O(1) insertion, retrieval, and deletion.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">3. Custom Binary Min-Heap Priority Queue</div>
+            <ul>
+              <li>Array-backed binary heap ordering elements by composite penalty.</li>
+              <li>Operations: insert() via sift_up; extract_min() via sift_down.</li>
+              <li>Extracts top-K quiet recommendations in O(K log N) time.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">4. Recommendation Scoring Formulation</div>
+            <ul>
+              <li>Score = wN * NoisePenalty + wD * DistancePenalty + wA * AgePenalty.</li>
+              <li>Weights: wN = 0.50 (Noise), wD = 0.30 (Distance), wA = 0.20 (Freshness).</li>
+              <li>Haversine Formula: d = 2R * atan2(sqrt(a), sqrt(1-a)), R = 6371 km.</li>
+              <li>Missing Data: 0.65 uncertainty penalty (never assumed quiet).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>QuietSpot 2.0 &bull; Review 2 Presentation</span>
+        <span>Slide 11 of 14</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 12 -->
+    <div class="slide" id="slide-12">
+      <div class="slide-header">
+        <div>
+          <div class="header-inst">KONGU ENGINEERING COLLEGE (Autonomous), PERUNDURAI</div>
+          <div class="header-title">12. Screenshots of Working Modules</div>
+        </div>
+        <div class="header-tag">USER INTERFACE SHOWCASE</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title">Landing & KEC Badge</div>
+            <p style="font-size: 0.85rem;">Official KEC campus badge, 'Find Your Perfect Study Spot' headline, and quick navigation CTAs.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Welcome Live Monitor Modal</div>
+            <p style="font-size: 0.85rem;">Gently prompts user on arrival; explains zero-recording privacy guarantee; 1-click permission trigger.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Leaflet Campus Sound Map</div>
+            <p style="font-size: 0.85rem;">Centered on KEC coordinates (11.27218, 77.6040); custom noise-coded SVG pins; interactive popups.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Live Noise Monitoring Studio</div>
+            <p style="font-size: 0.85rem;">Animated decibel speedometer, frequency waveform spectrum, and consented telemetry contribution toggle.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Filterable Quiet Spots</div>
+            <p style="font-size: 0.85rem;">Dynamic category filtering (Quiet, Moderate, Noisy, Stale), live distance, and 1-click Google Maps routing.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Algo Performance Lab</div>
+            <p style="font-size: 0.85rem;">Dataset size slider (500 to 20k), nanosecond timers, and Verified Equality Banner (100% ID match).</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>QuietSpot 2.0 &bull; Review 2 Presentation</span>
+        <span>Slide 12 of 14</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 13 -->
+    <div class="slide" id="slide-13">
+      <div class="slide-header">
+        <div>
+          <div class="header-inst">KONGU ENGINEERING COLLEGE (Autonomous), PERUNDURAI</div>
+          <div class="header-title">13. Project Demonstration & Review 2 Status</div>
+        </div>
+        <div class="header-tag">85%+ COMPLETION VERIFIED</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Review 2 Milestone Status (>85% Complete)</div>
+            <table>
+              <thead>
+                <tr><th>Component</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Backend RESTful API & Persistence</td><td><strong style="color: var(--kec-green-primary);">100% Completed</strong></td></tr>
+                <tr><td>Custom 2D Spatial Quadtree</td><td><strong style="color: var(--kec-green-primary);">100% Completed</strong></td></tr>
+                <tr><td>Custom Hash Map & Min-Heap</td><td><strong style="color: var(--kec-green-primary);">100% Completed</strong></td></tr>
+                <tr><td>Web Audio In-Memory RMS Engine</td><td><strong style="color: var(--kec-green-primary);">100% Completed</strong></td></tr>
+                <tr><td>Interactive Leaflet Map & KEC Dataset</td><td><strong style="color: var(--kec-green-primary);">100% Completed</strong></td></tr>
+                <tr><td>Automated Test Verification</td><td><strong style="color: var(--kec-green-primary);">28/28 Tests Passed (100%)</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <div class="card-title">Live Demonstration Plan for Reviewers</div>
+            <ul>
+              <li><strong>Step 1:</strong> Open http://localhost:5173/ and demonstrate the Welcome Modal with privacy guarantee.</li>
+              <li><strong>Step 2:</strong> Trigger live microphone monitoring; speak or clap to show real-time decibel needle reaction.</li>
+              <li><strong>Step 3:</strong> Click CD Memorial Library on the map and launch Google Maps walking navigation.</li>
+              <li><strong>Step 4:</strong> Filter study spots by 'Quiet (&lt;45 dB)' to isolate optimal study areas dynamically.</li>
+              <li><strong>Step 5:</strong> Run Quadtree vs Linear search live in Algo Lab showing ~3x speedup and 100% ID match.</li>
+              <li><strong>Step 6:</strong> Demonstrate pytest (21 tests) and vitest (7 tests) passing live.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>QuietSpot 2.0 &bull; Review 2 Presentation</span>
+        <span>Slide 13 of 14</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 14 -->
+    <div class="slide" id="slide-14">
+      <div class="slide-header">
+        <div>
+          <div class="header-inst">KONGU ENGINEERING COLLEGE (Autonomous), PERUNDURAI</div>
+          <div class="header-title">14. Conclusion & Future Enhancements</div>
+        </div>
+        <div class="header-tag">CONCLUSION & ACKNOWLEDGEMENTS</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Review 2 Achievements</div>
+            <ul>
+              <li><strong>Exceeded 70% Requirement:</strong> Prototype achieved over 85% full-stack completion with running frontend and backend servers.</li>
+              <li><strong>Custom Academic Rigor:</strong> Implemented Quadtree, Hash Map, and Min-Heap without external algorithmic libraries.</li>
+              <li><strong>Authentic Ground-Truth:</strong> Verified OpenStreetMap coordinates for Kongu Engineering College with zero fake data.</li>
+              <li><strong>Privacy By Architecture:</strong> Proven client-side Web Audio RMS pipeline guaranteeing zero audio storage.</li>
+              <li><strong>Full Test Coverage:</strong> 21 backend pytest cases and 7 frontend vitest cases passing with 100% success rate.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Future Work & Acknowledgements</div>
+            <ul>
+              <li><strong>Phase 3 Planned Enhancements:</strong> Fixed solar-powered low-power ESP32 IoT beacons for 24/7 lawn coverage; Machine Learning LSTM predictive quiet hour forecasting.</li>
+              <li><strong>Acknowledgements:</strong> Sincere gratitude to our Project Guide, HOD, and faculty of the Department of Computer Science and Engineering, Kongu Engineering College.</li>
+              <li><strong>Q & A:</strong> Thank you! We are now open for evaluation questions and suggestions from the review committee.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>QuietSpot 2.0 &bull; Review 2 Presentation</span>
+        <span>Slide 14 of 14</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 14;
+
+    function showSlide(n) {
+      if (n < 1) n = 1;
+      if (n > totalSlides) n = totalSlides;
+      currentSlide = n;
+
+      for (let i = 1; i <= totalSlides; i++) {
+        const el = document.getElementById('slide-' + i);
+        if (el) el.classList.remove('active');
+      }
+      const activeEl = document.getElementById('slide-' + currentSlide);
+      if (activeEl) activeEl.classList.add('active');
+
+      document.getElementById('slideIndicator').innerText = 'Slide ' + currentSlide + ' of ' + totalSlides;
+    }
+
+    function nextSlide() { showSlide(currentSlide + 1); }
+    function prevSlide() { showSlide(currentSlide - 1); }
+
+    function toggleFullscreen() {
+      const elem = document.getElementById('viewport');
+      if (!document.fullscreenElement) {
+        elem.requestFullscreen().catch(err => alert("Error entering fullscreen: " + err.message));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    // Keyboard navigation (Arrow keys & Space)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') nextSlide();
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+      if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+    });
+  </script>
+</body>
+</html>
