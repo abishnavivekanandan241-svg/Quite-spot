@@ -1,4 +1,4 @@
-# QuietSpot 2.0 — Automated Test Report
+# QuietSpot — Automated Test Report
 
 **Execution Timestamp:** 2026-10-14  
 **Test Runners:** `pytest` 9.1.1 (Python 3.13.6), `vitest` 2.1.9 (Node v22.20.0)  

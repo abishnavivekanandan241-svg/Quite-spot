@@ -109,7 +109,7 @@ export function AuthPage() {
           }}>
             <Volume2 size={26} />
           </div>
-          <h2 style={{ fontSize: "1.4rem", fontWeight: 800 }}>QuietSpot 2.0 Account</h2>
+          <h2 style={{ fontSize: "1.4rem", fontWeight: 800 }}>QuietSpot Account</h2>
           <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", marginTop: "4px" }}>
             Kongu Engineering College Study Portal
           </p>

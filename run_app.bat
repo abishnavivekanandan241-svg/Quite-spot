@@ -1,14 +1,14 @@
 @echo off
-title QuietSpot 2.0 Launcher
+title QuietSpot Launcher
 echo ============================================================
-echo   Starting QuietSpot 2.0 - Kongu Engineering College
+echo   Starting QuietSpot - Kongu Engineering College
 echo ============================================================
 echo.
 echo [1/2] Launching Flask Backend on Port 5000...
-start "QuietSpot 2.0 - Backend (Flask)" cmd /k "cd backend && python run.py"
+start "QuietSpot - Backend (Flask)" cmd /k "cd backend && python run.py"
 
 echo [2/2] Launching Vite React Frontend on Port 5173...
-start "QuietSpot 2.0 - Frontend (Vite)" cmd /k "cd frontend && npm run dev"
+start "QuietSpot - Frontend (Vite)" cmd /k "cd frontend && npm run dev"
 
 echo.
 echo ============================================================

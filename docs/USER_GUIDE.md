@@ -1,6 +1,6 @@
-# QuietSpot 2.0 — Student & Faculty User Guide
+# QuietSpot — Student & Faculty User Guide
 
-Welcome to **QuietSpot 2.0**, the intelligent campus acoustic mapping and quiet-spot recommendation system for **Kongu Engineering College (KEC)**.
+Welcome to **QuietSpot**, the intelligent campus acoustic mapping and quiet-spot recommendation system for **Kongu Engineering College (KEC)**.
 
 ---
 

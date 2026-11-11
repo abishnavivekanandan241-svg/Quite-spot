@@ -1,7 +1,7 @@
-# QuietSpot 2.0 — Review 2 Presentation Script & Committee Q&A Guide
+# QuietSpot — Review 2 Presentation Script & Committee Q&A Guide
 **Kongu Engineering College (Autonomous), Perundurai**  
 **Department of Computer Science and Engineering**  
-**Project:** QuietSpot 2.0 — Intelligent Campus Noise Mapping and Quiet-Spot Recommendation System Using Quadtree  
+**Project:** QuietSpot — Intelligent Campus Noise Mapping and Quiet-Spot Recommendation System Using Quadtree  
 **Presentation File:** [`QuietSpot_2.0_Review_2_Presentation.pptx`](file:///c:/Users/abish/OneDrive/Documents/quite%20spot%202/QuietSpot_2.0_Review_2_Presentation.pptx)
 
 ---
@@ -11,7 +11,7 @@
 ### Slide 1: Title Slide (Team Members & Guide)
 - **Speaker:** Team Leader
 - **Script:**
-  > "Respected Review Committee members and our Project Guide, Good morning / afternoon. We are here to present our Review-2 progress for our college project titled **'QuietSpot 2.0: Intelligent Campus Noise Mapping and Quiet-Spot Recommendation System Using Quadtree'**, exclusively developed for **Kongu Engineering College**. 
+  > "Respected Review Committee members and our Project Guide, Good morning / afternoon. We are here to present our Review-2 progress for our college project titled **'QuietSpot: Intelligent Campus Noise Mapping and Quiet-Spot Recommendation System Using Quadtree'**, exclusively developed for **Kongu Engineering College**. 
   > In this review, we have crossed over **85% project completion**, featuring a functional full-stack application, custom spatial data structures, and in-browser edge audio processing. I am [Name], and along with my team members [Names], we will walk you through the implementation."
 
 ### Slide 2: Problem Statement
@@ -49,10 +49,10 @@
   > - Hardware decibel meter grids cost tens of thousands of rupees to install and maintain across 167 acres.
   > - Third-party sound meter apps frequently record or upload raw audio buffers, violating student privacy."
 
-### Slide 6: Proposed System (QuietSpot 2.0)
+### Slide 6: Proposed System (QuietSpot)
 - **Speaker:** Team Leader
 - **Script:**
-  > "QuietSpot 2.0 solves all these limitations:
+  > "QuietSpot solves all these limitations:
   > - Distributed, zero-cost sensing: Runs directly in student web browsers.
   > - Edge computing: Processes Float32 PCM samples into Root-Mean-Square (RMS) amplitude locally in volatile memory.
   > - Custom Quadtree: Recursively subdivides 2D space, pruning irrelevant quadrants in $O(\log N + K)$ average time.
@@ -97,7 +97,7 @@
 ### Slide 11: Algorithm & Mathematical Methodology
 - **Speaker:** Team Leader
 - **Script:**
-  > "The algorithmic heart of QuietSpot 2.0 is built without third-party spatial packages:
+  > "The algorithmic heart of QuietSpot is built without third-party spatial packages:
   > 1. **Spatial Quadtree:** Partitioning space into NW, NE, SW, SE quadrants. Reduces candidate filtering from linear $O(N)$ to $O(\log N + K)$ average complexity.
   > 2. **Custom Hash Map:** Employs polynomial rolling hash with separate chaining and dynamic capacity doubling when load factor exceeds 0.75.
   > 3. **Custom Min-Heap:** Array-backed binary tree with sift-up and sift-down for top-K recommendation extraction.
@@ -126,7 +126,7 @@
 ### Slide 14: Conclusion & Future Enhancements
 - **Speaker:** Team Leader
 - **Script:**
-  > "In conclusion, QuietSpot 2.0 demonstrates how distributed client-side Web Audio processing combined with custom 2D Spatial Quadtrees can solve campus noise navigation without costly hardware.
+  > "In conclusion, QuietSpot demonstrates how distributed client-side Web Audio processing combined with custom 2D Spatial Quadtrees can solve campus noise navigation without costly hardware.
   > For our Final Review (Phase 3), we plan to add solar-powered ESP32 outdoor beacons for lawn coverage and machine learning timetable prediction.
   > We thank our Project Guide, the HOD, and the faculty of the Department of Computer Science and Engineering for their guidance. We now welcome questions from the review committee."
 

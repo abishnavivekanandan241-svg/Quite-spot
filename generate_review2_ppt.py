@@ -80,7 +80,7 @@ def create_presentation():
         tb_foot = slide.shapes.add_textbox(Inches(0.6), Inches(7.1), Inches(12.133), Inches(0.35))
         tf_foot = tb_foot.text_frame
         p_foot = tf_foot.paragraphs[0]
-        p_foot.text = "QuietSpot 2.0 — Campus Noise Mapping & Quiet-Spot Recommendation System Using Quadtree  |  Department of CSE"
+        p_foot.text = "QuietSpot — Campus Noise Mapping & Quiet-Spot Recommendation System Using Quadtree  |  Department of CSE"
         p_foot.font.name = "Arial"
         p_foot.font.size = Pt(9.5)
         p_foot.font.color.rgb = TEXT_MUTED
@@ -148,7 +148,7 @@ def create_presentation():
     tf_proj = tb_proj.text_frame
     p_proj = tf_proj.paragraphs[0]
     p_proj.alignment = PP_ALIGN.CENTER
-    p_proj.text = "QUIETSPOT 2.0"
+    p_proj.text = "QUIETSPOT"
     p_proj.font.name = "Arial"
     p_proj.font.size = Pt(32)
     p_proj.font.bold = True
@@ -396,7 +396,7 @@ def create_presentation():
     # SLIDE 6: Proposed System
     # =========================================================================
     slide6 = prs.slides.add_slide(blank_layout)
-    add_header(slide6, "6. Proposed System — QuietSpot 2.0", "SOLUTION ARCHITECTURE")
+    add_header(slide6, "6. Proposed System — QuietSpot", "SOLUTION ARCHITECTURE")
 
     props = [
         ("1. Client-Side Distributed Sensing", 
@@ -793,7 +793,7 @@ def create_presentation():
     tf14_left.word_wrap = True
 
     achievements = [
-        ("Exceeded 70% Milestone:", "QuietSpot 2.0 has achieved over 85% full-stack completion with running frontend and backend servers."),
+        ("Exceeded 70% Milestone:", "QuietSpot has achieved over 85% full-stack completion with running frontend and backend servers."),
         ("Custom Academic Rigor:", "Successfully implemented custom 2D Spatial Quadtree, Custom Hash Map, and Min-Heap without external algorithmic libraries."),
         ("Authentic Campus Ground-Truth:", "Mapped real OpenStreetMap features for Kongu Engineering College with zero fabricated metrics or fake noise telemetry."),
         ("Privacy By Architecture:", "Proven client-side Web Audio RMS pipeline guaranteeing zero audio storage and zero eavesdropping."),

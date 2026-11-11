@@ -1,4 +1,4 @@
-# QUIETSPOT 2.0: INTELLIGENT CAMPUS NOISE MAPPING AND QUIET-SPOT RECOMMENDATION SYSTEM USING QUADTREE
+# QUIETSPOT: INTELLIGENT CAMPUS NOISE MAPPING AND QUIET-SPOT RECOMMENDATION SYSTEM USING QUADTREE
 
 **A PROJECT REPORT**  
 *Submitted in partial fulfilment of the requirements for the award of the degree of*  
@@ -27,7 +27,7 @@
 
 ## BONAFIDE CERTIFICATE
 
-Certified that this project report entitled **“QUIETSPOT 2.0: INTELLIGENT CAMPUS NOISE MAPPING AND QUIET-SPOT RECOMMENDATION SYSTEM USING QUADTREE”** is the bonafide work of **ABISHEK S (23CDR001), DAKSHANA S (23CDR014), DEEPAK P (23CDR015), and DHANUSHREE S (23CDR018)**, who carried out the project work under my supervision during the academic year 2026–2027, in partial fulfilment of the requirements for the award of the degree of Bachelor of Engineering in Computer Science and Design of Anna University Chennai.
+Certified that this project report entitled **“QUIETSPOT: INTELLIGENT CAMPUS NOISE MAPPING AND QUIET-SPOT RECOMMENDATION SYSTEM USING QUADTREE”** is the bonafide work of **ABISHEK S (23CDR001), DAKSHANA S (23CDR014), DEEPAK P (23CDR015), and DHANUSHREE S (23CDR018)**, who carried out the project work under my supervision during the academic year 2026–2027, in partial fulfilment of the requirements for the award of the degree of Bachelor of Engineering in Computer Science and Design of Anna University Chennai.
 
 **SUPERVISOR**  
 Ms. K. Swathi, M.Tech.,  
@@ -47,7 +47,7 @@ Submitted for the end semester viva voce examination held on: __________________
 
 ## DECLARATION
 
-We hereby declare that the project report entitled **“QUIETSPOT 2.0: INTELLIGENT CAMPUS NOISE MAPPING AND QUIET-SPOT RECOMMENDATION SYSTEM USING QUADTREE”** is the record of work carried out by us in the Department of Computer Science and Design, Kongu Engineering College, Perundurai, during the academic year 2026–2027.
+We hereby declare that the project report entitled **“QUIETSPOT: INTELLIGENT CAMPUS NOISE MAPPING AND QUIET-SPOT RECOMMENDATION SYSTEM USING QUADTREE”** is the record of work carried out by us in the Department of Computer Science and Design, Kongu Engineering College, Perundurai, during the academic year 2026–2027.
 
 We further declare that this report has not been submitted, either in full or in part, to any other institution or university for the award of any degree or diploma on an earlier occasion on this or any other candidate.
 
@@ -68,7 +68,7 @@ Date: November 2026
 
 Expansive university campuses require peaceful, low-noise environments for focused studying, scholarly research, and academic productivity. Kongu Engineering College (KEC) spans an extensive 167-acre campus hosting dozens of academic departments, central libraries, seminar complexes, cafeterias, and student hostels. Due to dynamic schedules, class breaks, pedestrian movement, and campus events, acoustic intensity fluctuates significantly throughout the day. Conventional physical signage and static campus maps provide zero live acoustic intelligence, while deploying dedicated hardware-based sound meter networks is cost-prohibitive across 167 acres. Furthermore, conventional sound apps frequently violate student privacy by recording or transmitting raw audio streams.
 
-To overcome these challenges, this project presents **QuietSpot 2.0**, an intelligent, privacy-first geospatial noise mapping and study spot recommendation system tailored exclusively for the Kongu Engineering College campus. QuietSpot 2.0 implements client-side edge computing utilizing the W3C Web Audio API to calculate Root-Mean-Square (RMS) amplitude and relative decibel intensity directly in volatile browser memory. The raw audio buffer is discarded immediately after metric calculation; no audio stream, voice recording, or audio byte is ever stored to disk or transmitted to the backend server.
+To overcome these challenges, this project presents **QuietSpot**, an intelligent, privacy-first geospatial noise mapping and study spot recommendation system tailored exclusively for the Kongu Engineering College campus. QuietSpot implements client-side edge computing utilizing the W3C Web Audio API to calculate Root-Mean-Square (RMS) amplitude and relative decibel intensity directly in volatile browser memory. The raw audio buffer is discarded immediately after metric calculation; no audio stream, voice recording, or audio byte is ever stored to disk or transmitted to the backend server.
 
 At the computational core, a custom two-dimensional Spatial Quadtree index recursively partitions geographic bounding boxes over verified KEC coordinates (Latitude 11.27218° N, Longitude 77.60400° E). Candidate quiet spots within a user-configured radius are retrieved via bounding-box pruning backed by exact Haversine great-circle spherical distance verification. Candidate locations are subsequently scored and ranked through a custom binary Min-Heap priority queue evaluating acoustic intensity, physical distance, and observation temporal freshness. An empirical Algorithm Performance Lab demonstrates that Quadtree spatial partitioning delivers significant computational acceleration over traditional linear scanning while maintaining 100% result fidelity. The modern responsive web application, built with React, Vite, Leaflet, and Flask with SQLite persistence, empowers students to discover optimal quiet locations, monitor real-time noise levels, and navigate directly using turn-by-turn walking routes.
 
@@ -270,7 +270,7 @@ We are grateful to all the faculty members and technical staff of the Computer S
 ### 1.1 GENERAL OVERVIEW
 Higher education environments thrive on focused individual concentration, scholarly research, and quiet collaborative discussions. Kongu Engineering College (KEC), established under the autonomous framework in Perundurai, Erode, encompasses an expansive 167-acre campus. The institution features diverse physical facilities including the Central CD Memorial Library, numerous department blocks, research clusters, computer centres, convention halls, cafeterias, and student hostels. Across such a vast campus, ambient noise levels vary drastically depending on class transitions, ongoing laboratory sessions, administrative activities, and campus events.
 
-QuietSpot 2.0 is an intelligent, full-stack campus noise mapping and quiet-spot recommendation system designed explicitly for students, researchers, and faculty members of Kongu Engineering College. By bridging spatial data structures, edge audio processing, and responsive web design, QuietSpot 2.0 offers an automated, privacy-conscious mechanism to discover, rank, and navigate to peaceful study spaces across the KEC campus in real time.
+QuietSpot is an intelligent, full-stack campus noise mapping and quiet-spot recommendation system designed explicitly for students, researchers, and faculty members of Kongu Engineering College. By bridging spatial data structures, edge audio processing, and responsive web design, QuietSpot offers an automated, privacy-conscious mechanism to discover, rank, and navigate to peaceful study spaces across the KEC campus in real time.
 
 ### 1.2 PROBLEM STATEMENT
 Students frequently spend significant time walking across campus in search of an unoccupied, calm study environment, only to find designated reading areas unexpectedly crowded or noisy due to nearby events or maintenance operations. Existing campus maps are entirely static, providing geographic locations but zero live acoustic context. Furthermore, deploying dedicated physical decibel meter hardware across dozens of campus buildings is financially prohibitive and maintenance-intensive. On the other hand, conventional mobile sensing systems that record audio raise severe privacy and surveillance apprehensions among students and faculty. Therefore, there is a compelling need for a system that provides real-time acoustic intelligence and spatial search capabilities while maintaining zero audio persistence and guaranteeing student privacy.
@@ -288,7 +288,7 @@ The primary objective is to engineer a responsive, privacy-guaranteed geospatial
 The project encompasses the entire 167-acre geographic boundary of Kongu Engineering College (Latitude 11.2670° N to 11.2765° N, Longitude 77.5990° E to 77.6105° E). The system supports in-browser acoustic sampling, spatial radius querying up to 2.5 km, real-time recommendation scoring, and student ground-truth verification. AI speech recognition, invasive voice transcription, and dedicated hardware micro-controller nodes are deliberately outside the current project scope.
 
 ### 1.5 NEED FOR THE PROJECT
-Academic productivity and cognitive retention depend heavily on acoustic tranquility. By providing empirical, real-time noise mapping without requiring expensive hardware installations or compromising user privacy, QuietSpot 2.0 optimizes study spot discovery and promotes productive academic engagement across the student community.
+Academic productivity and cognitive retention depend heavily on acoustic tranquility. By providing empirical, real-time noise mapping without requiring expensive hardware installations or compromising user privacy, QuietSpot optimizes study spot discovery and promotes productive academic engagement across the student community.
 
 ### 1.6 PROPOSED SYSTEM WORKFLOW
 The application operates through a sequential six-stage workflow:
@@ -314,7 +314,7 @@ Currently, campus quiet spaces are managed through static physical signboards (e
 4. **Lack of Algorithmic Pruning:** Existing directories rely on simple linear scans, which do not scale efficiently for spatial candidate filtering.
 
 ### 2.4 PROPOSED SYSTEM
-QuietSpot 2.0 transforms student laptops and smartphones into edge sensing nodes that process sound directly within the browser using the W3C Web Audio API. Derived acoustic metrics are spatialized via custom 2D Quadtree indexing and evaluated through a Min-Heap multi-factor recommendation pipeline, ensuring high computational speed, transparent provenance, and complete privacy.
+QuietSpot transforms student laptops and smartphones into edge sensing nodes that process sound directly within the browser using the W3C Web Audio API. Derived acoustic metrics are spatialized via custom 2D Quadtree indexing and evaluated through a Min-Heap multi-factor recommendation pipeline, ensuring high computational speed, transparent provenance, and complete privacy.
 
 ### 2.5 ADVANTAGES OF THE PROPOSED SYSTEM
 1. **Zero Hardware Expense:** Eliminates physical IoT sensors by leveraging existing student web browsers.
@@ -327,7 +327,7 @@ QuietSpot 2.0 transforms student laptops and smartphones into edge sensing nodes
 ## CHAPTER 3: SYSTEM DESIGN
 
 ### 3.1 SYSTEM ARCHITECTURE
-QuietSpot 2.0 adopts a 3-Tier Layered Architecture:
+QuietSpot adopts a 3-Tier Layered Architecture:
 1. **Presentation Layer (Client Tier):** React 19, Vite, Leaflet, and W3C Web Audio API.
 2. **Application Layer (Server Tier):** Python 3.13, Flask 3.1, custom 2D Spatial Quadtree, binary Min-Heap, and polynomial chained Hash Map.
 3. **Data Layer (Persistence Tier):** SQLite with strict foreign key constraints and composite indexing.

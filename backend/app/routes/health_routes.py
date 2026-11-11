@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, current_app
 from datetime import datetime, timezone
 from app.config import Config
 from app.models.schema import get_db_connection
@@ -9,7 +9,8 @@ health_bp = Blueprint("health", __name__)
 def health_check():
     db_ok = False
     try:
-        conn = get_db_connection(Config.DATABASE_PATH)
+        db_path = current_app.config.get("DATABASE_PATH", Config.DATABASE_PATH)
+        conn = get_db_connection(db_path)
         cursor = conn.execute("SELECT 1")
         db_ok = (cursor.fetchone()[0] == 1)
         conn.close()
@@ -18,7 +19,7 @@ def health_check():
 
     return jsonify({
         "status": "healthy" if db_ok else "degraded",
-        "service": "QuietSpot 2.0 API",
+        "service": "QuietSpot API",
         "version": "2.0.0",
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "database": {

@@ -36,7 +36,7 @@ export function SettingsPage({
         </h2>
         <div style={{ fontSize: "0.9rem", color: "var(--text-secondary)", lineHeight: 1.6, display: "flex", flexDirection: "column", gap: "10px" }}>
           <p>
-            QuietSpot 2.0 strictly honors student privacy. When live monitoring is granted:
+            QuietSpot strictly honors student privacy. When live monitoring is granted:
           </p>
           <ul style={{ paddingLeft: "20px", display: "flex", flexDirection: "column", gap: "6px" }}>
             <li><strong>Zero Audio Storage:</strong> No audio files, WAV, MP3, or voice recordings are ever created or saved.</li>

@@ -184,7 +184,7 @@ export function LiveMonitorPromptModal({
 
             {/* Explanation */}
             <p style={{ fontSize: "0.92rem", color: "var(--text-secondary)", lineHeight: 1.55 }}>
-              QuietSpot 2.0 uses your device's microphone to locally measure environmental sound intensity, 
+              QuietSpot uses your device's microphone to locally measure environmental sound intensity, 
               helping students identify quiet study spots across <strong>Kongu Engineering College</strong> in real time.
             </p>
 

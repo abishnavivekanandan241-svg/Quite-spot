@@ -1,6 +1,6 @@
-# QuietSpot 2.0 — Database Design Specification
+# QuietSpot — Database Design Specification
 
-QuietSpot 2.0 uses **SQLite** with strict foreign key constraints, parameterized prepared statements, and targeted composite indexes.
+QuietSpot uses **SQLite** with strict foreign key constraints, parameterized prepared statements, and targeted composite indexes.
 
 ---
 

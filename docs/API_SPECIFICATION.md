@@ -1,4 +1,4 @@
-# QuietSpot 2.0 — RESTful API Specification
+# QuietSpot — RESTful API Specification
 
 **Base URL:** `http://localhost:5000/api`  
 **Data Exchange Format:** `application/json`  
@@ -15,7 +15,7 @@ Returns system status, active database connection, and institution metadata.
   ```json
   {
     "status": "healthy",
-    "service": "QuietSpot 2.0 API",
+    "service": "QuietSpot API",
     "version": "2.0.0",
     "timestamp": "2026-10-14T16:35:19.281605+00:00",
     "database": {

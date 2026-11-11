@@ -1,4 +1,4 @@
-# QuietSpot 2.0 — Implementation Plan & Traceability Matrix
+# QuietSpot — Implementation Plan & Traceability Matrix
 
 ## 1. Project Overview & Target Directory Structure
 

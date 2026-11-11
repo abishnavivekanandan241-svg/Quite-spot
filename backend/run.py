@@ -8,5 +8,5 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     host = os.environ.get("HOST", "0.0.0.0")
     debug = os.environ.get("FLASK_DEBUG", "True").lower() in ("true", "1")
-    print(f"Starting QuietSpot 2.0 Backend on http://{host}:{port} (debug={debug})")
+    print(f"Starting QuietSpot Backend on http://{host}:{port} (debug={debug})")
     app.run(host=host, port=port, debug=debug)

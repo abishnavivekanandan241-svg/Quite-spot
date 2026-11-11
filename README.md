@@ -1,4 +1,4 @@
-# QuietSpot 2.0 — Intelligent Campus Noise Mapping and Quiet-Spot Recommendation System Using Quadtree
+# QuietSpot — Intelligent Campus Noise Mapping and Quiet-Spot Recommendation System Using Quadtree
 
 **Institution:** Kongu Engineering College (KEC), Perundurai, Erode, Tamil Nadu, India  
 **Official Website:** [https://kongu.ac.in/](https://kongu.ac.in/)  
@@ -8,7 +8,7 @@
 
 ## 1. Project Overview
 
-QuietSpot 2.0 is a full-stack, responsive, geospatial noise-monitoring and study spot recommendation system tailored specifically for students, researchers, and faculty at Kongu Engineering College.
+QuietSpot is a full-stack, responsive, geospatial noise-monitoring and study spot recommendation system tailored specifically for students, researchers, and faculty at Kongu Engineering College.
 
 The application allows students to discover verified study spaces across campus (such as the CD Memorial Central Library, academic reading halls, and quiet department zones), inspect real client-contributed sound intensity levels, monitor their own local acoustic environment using in-browser Web Audio processing, and explore custom spatial data structures (2D Quadtree, Min-Heap, and Hash Map) with empirical runtime benchmarks.
 

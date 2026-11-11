@@ -45,7 +45,7 @@ export function Navbar({ isMonitoring }) {
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
             <span style={{ fontWeight: 800, fontSize: "1.2rem", color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
-              QuietSpot<span style={{ color: "var(--color-primary)" }}> 2.0</span>
+              Quiet<span style={{ color: "var(--color-primary)" }}>Spot</span>
             </span>
           </div>
           <div style={{ fontSize: "0.72rem", color: "var(--text-muted)", fontWeight: 500, lineHeight: 1 }}>

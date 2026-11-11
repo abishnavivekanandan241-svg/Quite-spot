@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime, timezone
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.config import Config
 from app.models.schema import get_db_connection
@@ -21,7 +21,8 @@ def register():
     if not password or len(password) < 6:
         return jsonify({"success": False, "error": "Password must be at least 6 characters long"}), 400
 
-    conn = get_db_connection(Config.DATABASE_PATH)
+    db_path = current_app.config.get("DATABASE_PATH", Config.DATABASE_PATH)
+    conn = get_db_connection(db_path)
     try:
         # Check existing
         cursor = conn.execute("SELECT id FROM app_users WHERE username = ? OR email = ?", (username, email))
@@ -61,7 +62,8 @@ def login():
     if not email_or_username or not password:
         return jsonify({"success": False, "error": "Email/Username and password are required"}), 400
 
-    conn = get_db_connection(Config.DATABASE_PATH)
+    db_path = current_app.config.get("DATABASE_PATH", Config.DATABASE_PATH)
+    conn = get_db_connection(db_path)
     try:
         cursor = conn.execute(
             "SELECT id, username, email, password_hash, created_at FROM app_users WHERE email = ? OR username = ?",

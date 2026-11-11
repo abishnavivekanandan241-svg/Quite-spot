@@ -1,5 +1,5 @@
 """
-QuietSpot 2.0 — Project Report Generator (PDF & DOCX)
+QuietSpot — Project Report Generator (PDF & DOCX)
 Adhering strictly to Kongu Engineering College (KEC) Manual for Preparation of Project Report:
 - Standard A4 Dimensions: 297mm x 210mm
 - Page Margins: Top 30mm, Bottom 25mm, Left 35mm, Right 20mm
@@ -16,7 +16,7 @@ import sys
 
 def main():
     print("=" * 70)
-    print("  Generating QuietSpot 2.0 Project Report (DOCX & PDF)...")
+    print("  Generating QuietSpot Project Report (DOCX & PDF)...")
     print("  Strictly formatted according to Kongu Engineering College Guidelines")
     print("=" * 70)
 
